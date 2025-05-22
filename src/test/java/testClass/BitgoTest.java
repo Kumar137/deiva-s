@@ -58,7 +58,7 @@ public class BitgoTest {
                 txLink.sendKeys(clickLink);
 
                 try {
-                    wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("main")));
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='vin']")));
 
                     System.out.println("Inside Try");
                     // Count Inputs
