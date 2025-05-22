@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -52,14 +53,14 @@ public class BitgoTest {
             // Limit to first 25
             for (int i = 0; i < Math.min(transactions.size(), 25); i++) {
                 WebElement txLink = transactions.get(i);
-                System.out.println("Link are: ->"+txLink.getText());
+                System.out.println("Link are: ->" + txLink.getText());
                 String clickLink = Keys.chord(Keys.CONTROL, Keys.ENTER);
                 txLink.sendKeys(clickLink);
 
                 try {
                     wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("main")));
 
-                    System.out.println("Inside Try" );
+                    System.out.println("Inside Try");
                     // Count Inputs
                     List<WebElement> inputs = driver.findElements(By.xpath("//div[@class='vin']"));
                     // Count Outputs
@@ -76,9 +77,17 @@ public class BitgoTest {
                 driver.navigate().back(); // switch back to main tab
             }
 
-        } finally {
-            driver.quit();
         }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    @AfterMethod
+    public void tearDown()
+    {
+        driver.close();
     }
 }
 
